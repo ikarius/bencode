@@ -3,14 +3,14 @@
 
 (def- ascii-chars (string/from-bytes ;(range 256)))
 
-(def peg-decode ~{:ascii (set ,ascii-chars)
-                  :sep "e"
-                  :integer (* "i" (cmt (<- (* (? "-") :d+)) ,parse) :sep)
-                  :string (cmt (* (/ (<- :d+) ,parse :1) ":" (<- (lenprefix (-> :1) :ascii))) ,|$1)
-                  :list (group (* "l" (any (+ :data)) :sep))
-                  :table (* "d" (replace (any (* :string :data)) ,struct))
-                  :data (+ :list :table :integer :string)
-                  :main (any :data) })
+(def- peg-decode ~{:ascii (set ,ascii-chars)
+                   :sep "e"
+                   :integer (* "i" (cmt (<- (* (? "-") :d+)) ,parse) :sep)
+                   :string (cmt (* (/ (<- :d+) ,parse :1) ":" (<- (lenprefix (-> :1) :ascii))) ,|$1)
+                   :list (group (* "l" (any (+ :data)) :sep))
+                   :table (* "d" (replace (any (* :string :data)) ,struct))
+                   :data (+ :list :table :integer :string)
+                   :main (any :data) })
 
 (defn decode 
   "
