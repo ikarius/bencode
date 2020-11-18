@@ -41,7 +41,7 @@
   (def buf @"")
   
   (defn- encode-string [s]
-    (assert (= (type s) :string))
+    (assert (find |(= $ (type s)) [:string :buffer :keyword]))
     (buffer/push-string buf (string (length s) ":" s)))
 
   (defn- encode-integer [i]
@@ -49,14 +49,14 @@
     (buffer/push-string buf (string "i" (int/s64 i) "e")))
 
   (defn- encode-list [l]
-    (assert (or (= (type l) :array) (= (type l) :tuple)))
+    (assert (find |(= $ (type l)) [:array :tuple]))
     (buffer/push-string buf "l")  
     (each v l
         (buffer/push-string buf (encode v)))
     (buffer/push-string buf "e"))
 
   (defn- encode-table [t]
-    (assert (or (= (type t) :struct) (= (type t) :table)))
+    (assert (find |(= $ (type t)) [:struct :table]))
     (buffer/push-string buf "d")  
     (eachp [k v] t
       (print k ", " v)
@@ -73,6 +73,8 @@
     :array  (encode-list o)
     :number (encode-integer o)
     :string (encode-string o)
+    :keyword (encode-string o)
+    :buffer (encode-string o)
     :struct (encode-table o)
     :table  (encode-table o)
 
