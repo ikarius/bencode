@@ -1,4 +1,4 @@
-### Bencoding
+### Bencode
 ### https://wiki.theory.org/BitTorrentSpecification#Bencoding
 
 (def- ascii-chars (string/from-bytes ;(range 256)))
@@ -57,7 +57,6 @@
 
   (defn- encode-table [t]
     (assert (or (= (type t) :struct) (= (type t) :table)))
-    (print "EC: " t)
     (buffer/push-string buf "d")  
     (eachp [k v] t
       (print k ", " v)
