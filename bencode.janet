@@ -59,7 +59,6 @@
     (assert (find |(= $ (type t)) [:struct :table]))
     (buffer/push-string buf "d")  
     (eachp [k v] t
-      (print k ", " v)
       (when strict?
         (assert (or (= :keyword (type k)) (= :string (type k)))))
       (buffer/push-string buf (encode (string k)))
