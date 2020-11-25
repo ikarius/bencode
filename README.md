@@ -14,6 +14,8 @@ Add a dependency in your `project.janet` file:
 )
 ```
 
+or just copy the `bencode.janet` in your project folder.
+
 ## Usage
 
 bencode uses PEG for decoding and a naive recusive implementation for encoding.
