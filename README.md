@@ -14,7 +14,7 @@ Add a dependency in your `project.janet` file:
 )
 ```
 
-or just copy the `bencode.janet` in your project folder.
+or just copy `bencode.janet` in your project folder.
 
 ## Usage
 
