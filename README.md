@@ -18,7 +18,7 @@ or just copy `bencode.janet` in your project folder.
 
 ## Usage
 
-bencode uses PEG for decoding and a naive recusive implementation for encoding.
+bencode uses PEG for decoding and a naive recursive implementation for encoding.
 
 ```
 (import bencode)
